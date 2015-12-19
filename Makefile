@@ -20,10 +20,10 @@ INSTALL_MAN = $(INSTALL) -D -m 644
 
 PREFIX   = /usr/local
 
-bin_dir  = $(PREFIX)/bin
-man_dir  = $(PREFIX)/share/man
-man1_dir = $(man_dir)/man1
-man6_dir = $(man_dir)/man6
+BIN_DIR  = $(PREFIX)/bin
+MAN_DIR  = $(PREFIX)/share/man
+MAN1_DIR = $(MAN_DIR)/man1
+MAN6_DIR = $(MAN_DIR)/man6
 
 debug ?= 0
 
@@ -50,7 +50,7 @@ clobber: clean
 .PHONY: clobber
 
 install: $(PROGRAM)
-	$(INSTALL_BIN) $(PROGRAM) $(DESTDIR)$(bin_dir)/$(PROGRAM)
+	$(INSTALL_BIN) $(PROGRAM) $(DESTDIR)$(BIN_DIR)/$(PROGRAM)
 .PHONY: install
 
 install-strip:
@@ -58,5 +58,5 @@ install-strip:
 .PHONY: install-strip
 
 uninstall:
-	$(RM) $(DESTDIR)$(bin_dir)/$(PROGRAM)
+	$(RM) $(DESTDIR)$(BIN_DIR)/$(PROGRAM)
 .PHONY: uninstall
