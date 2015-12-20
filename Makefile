@@ -4,6 +4,7 @@ VERSION ?= $(shell git describe --always --tags --dirty || echo unknown)
 
 PROGRAM = example
 SOURCES = example.c
+DEPENDS = .depends
 
 CC       ?= gcc
 CFLAGS   ?= -g -O2
@@ -36,7 +37,7 @@ CPPFLAGS += -DPREFIX=$(PREFIX)   \
             -DPROGRAM=$(PROGRAM) \
             -DVERSION=$(VERSION)
 
-all: $(PROGRAM)
+all: $(DEPENDS) $(PROGRAM)
 .PHONY: all
 
 $(PROGRAM): $(SOURCES)
@@ -60,3 +61,14 @@ install-strip:
 uninstall:
 	$(RM) $(DESTDIR)$(BIN_DIR)/$(PROGRAM)
 .PHONY: uninstall
+
+depend:
+	$(RM) $(DEPENDS)
+	make $(DEPENDS)
+.PHONY: depend
+
+$(DEPENDS):
+	touch $(DEPENDS)
+	makedepend -Y -f $(DEPENDS) -- $(CFLAGS) $(CPPFLAGS) -- $(SRCS) >&/dev/null
+
+sinclude $(DEPENDS)

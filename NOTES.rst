@@ -34,6 +34,7 @@ Targets
 
 * ``clean`` and ``clobber``
 * ``install``, ``install-strip``, and ``uninstall``
+* ``depend`` for genearting ``.depends`` by ``makedepend``
 
 ``.PHONY`` declaration
 ----------------------
